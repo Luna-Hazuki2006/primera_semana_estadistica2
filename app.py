@@ -67,7 +67,7 @@ def primero():
     mostrar_tabla(todo[0])
     total = todo[0]['fa'][-1]
     print(f'Total {total}')
-    a = todo[0]['clase'][0]['maximo'] - todo[0]['clase'][0]['minimo'] + 1
+    a = todo[0]['clase'][0]['maximo'] - todo[0]['clase'][0]['minimo'] 
     print(f"Sum: {sum(todo[0]['fi.xi'])}")
     media = sum(todo[0]['fi.xi']) / total
     print(f'Media aritmética: {media}')

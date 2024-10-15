@@ -38,7 +38,7 @@ def primero():
                 para = minimo + amplitud - 1
                 clase = {
                     'minimo': minimo, 
-                    'maximo': para
+                    'maximo': para + 1
                 }
                 minimo = para + 1
                 real.append(clase)
@@ -46,7 +46,7 @@ def primero():
             oficial[0]['fi'] = []
             for esto in real: 
                 numero = 0
-                for i in range(esto['minimo'], esto['maximo'] + 1): 
+                for i in range(esto['minimo'], esto['maximo']): 
                     try: numero += lista[i]
                     except: continue
                 oficial[0]['fi'].append(numero)
@@ -66,7 +66,9 @@ def primero():
             json.dump(oficial, f, indent=4)
     mostrar_tabla(todo[0])
     total = todo[0]['fa'][-1]
+    print(f'Total {total}')
     a = todo[0]['clase'][0]['maximo'] - todo[0]['clase'][0]['minimo'] + 1
+    print(f"Sum: {sum(todo[0]['fi.xi'])}")
     media = sum(todo[0]['fi.xi']) / total
     print(f'Media aritmética: {media}')
     calculo = total / 2

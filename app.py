@@ -123,8 +123,14 @@ def primero():
     print(f'Coeficiente de variación: {round(coeficiente, 4)}')
     print(f'Rango intercuartil: {round(intercuartil, 4)}')
     indice = (3 * (media - mediana)) / desviacion
-    print(f'Índice de asimetría: {round(indice, 4)}')
-    print(f'Curtosis: {curtosis}')
+    if indice == 0: simetria = 'Es simétrica'
+    elif indice > 0: simetria = 'Es asimétrica positiva con sesgo a la derecha'
+    elif indice < 0: simetria = 'Es asimétrica negativa con sesgo a la izquierda'
+    print(f'Índice de asimetría: {round(indice, 4)} ({simetria})')
+    if curtosis == 0: apuntamiento = 'Es mesocúrtica como la normal'
+    elif curtosis > 0: apuntamiento = 'Es leptocúrtica apuntada'
+    elif curtosis < 0: apuntamiento = 'Es platicúrtica aplanada'
+    print(f'Curtosis: {curtosis} ({apuntamiento})')
     print('++++++++++++++++++++++++++++++++++++++++++++')
     print('**********************************************')
     print('Clases: ')

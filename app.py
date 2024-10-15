@@ -104,16 +104,25 @@ def primero():
         q = obtencion(todo[0], ((25 * i) / 100) * total)
         cuartiles.append(q)
     intercuartil = cuartiles[2] - cuartiles[0]
-    gran_total = total[0]['fa'][-1]
-    p75 = obtencion(total[0], (75 / 100) * gran_total)
-    p25 = obtencion(total[0], (25 / 100) * gran_total)
-    p90 = obtencion(total[0], (90 / 100) * gran_total)
-    p10 = obtencion(total[0], (10 / 100) * gran_total)
+    p75 = obtencion(todo[0], (75 / 100) * total)
+    p25 = obtencion(todo[0], (25 / 100) * total)
+    p90 = obtencion(todo[0], (90 / 100) * total)
+    p10 = obtencion(todo[0], (10 / 100) * total)
     curtosis = ((p75 - p25) / (p90 - p10)) * 0.5
-    p65 = obtencion(total[0], (65 / 100) * gran_total)
+    p65 = obtencion(todo[0], (65 / 100) * total)
     print(f'P65: {round(p65, 4)}')
-    
+    print(f'Q3: {round(cuartiles[2], 4)}')
+    d30 = obtencion(todo[0], (30 / 100) * total)
+    print(f'D30: {round(d30, 4)}')
+    d80 = obtencion(todo[0], (80 / 100) * total)
+    print(f'D80: {round(d80, 4)}')
+    print(f'Q1: {round(cuartiles[0], 4)}')
+    coeficiente = (desviacion / media) * 100
+    print(f'Coeficiente de variación: {round(coeficiente, 4)}')
     print(f'Rango intercuartil: {round(intercuartil, 4)}')
+    indice = (3 * (media - mediana)) / desviacion
+    print(f'Índice de asimetría: {round(indice, 4)}')
+    print(f'Curtosis: {curtosis}')
     print('++++++++++++++++++++++++++++++++++++++++++++')
     print('**********************************************')
     print('Clases: ')
@@ -168,6 +177,8 @@ def mostrar_tabla(todo : dict):
 
 def main(): 
     primero()
+    print('Para cambiar los datos borre la información que está en el archivo "ejercicio.json"')
+    print('Después imprima la información que está en el archivo README')
 
 if __name__ == '__main__': 
     main()

@@ -147,7 +147,7 @@ def buscar_modales(fi : list):
             lista.append(i)
     return lista
 
-def obtencion(lista, numero): 
+def obtencion(lista, numero):
     fa = lista['fa']
     fi = lista['fi']
     clase = lista['clase']
@@ -156,7 +156,8 @@ def obtencion(lista, numero):
         if esto >= numero: 
             indice = fa.index(esto)
             break
-    fa_numero = fa[indice - 1]
+    if indice == 0: fa_numero = 0
+    else: fa_numero = fa[indice - 1]
     fi_numero = fi[indice]
     li = clase[indice]['minimo']
     amplitud = clase[0]['maximo'] - clase[0]['minimo']

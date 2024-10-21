@@ -1,69 +1,56 @@
 import json
 import math
+import csv
 from pprint import pprint
 
-def primero(): 
-    todo = []
-    with open('ejercicio.json', 'r+') as f: 
-        try: 
-            todo = json.load(f)
-        except: 
-            todo = f.readlines()
-            todo = list(todo)
-        if len(todo) == 0: 
-            try: 
-                r = str(input('Por favor, escribe la lista de los intervalos separados por espacios: \n'))
-                r = r.split(' ')
-                r = list(map(lambda x: int(x), r))
-            except: 
-                print('¡Oh no! Ingresaste un dato que no era un número, ¡No te equivoques!')
-                return
-            minimo = min(r)
-            maximo = max(r)
-            n = len(r)
-            rango = maximo - minimo 
-            k = 1 + 3.3 * math.log(n, 10)
-            amplitud = rango / k
-            if amplitud > int(amplitud): 
-                amplitud += 1
-                amplitud = int(amplitud)
-            lista = {}
-            for esto in r: 
-                try: lista[esto] += 1
-                except: lista[esto] = 1
-            real = []
-            para = 0
-            while True: 
-                if minimo > maximo: break
-                para = minimo + amplitud - 1
-                clase = {
-                    'minimo': minimo, 
-                    'maximo': para + 1
-                }
-                minimo = para + 1
-                real.append(clase)
-            oficial = [{'clase': real}]
-            oficial[0]['fi'] = []
-            for esto in real: 
-                numero = 0
-                for i in range(esto['minimo'], esto['maximo']): 
-                    try: numero += lista[i]
-                    except: continue
-                oficial[0]['fi'].append(numero)
-            parte = []
-            for esto in oficial[0]['fi']: 
-                if len(parte) >= 1: parte.append(esto + parte[-1])
-                else: parte.append(esto)
-            oficial[0]['fa'] = parte
-            oficial[0]['xi'] = list(map(lambda x: (x['minimo'] + x['maximo']) / 2, oficial[0]['clase']))
-            oficial[0]['fi.xi'] = [(xi * fi) for xi, fi in zip(oficial[0]['fi'], oficial[0]['xi'])]
-            oficial[0]['fsr'] = list(map(lambda x: x / oficial[0]['fa'][-1], oficial[0]['fi']))
-            oficial[0]['far'] = list(map(lambda x: x / oficial[0]['fa'][-1], oficial[0]['fa']))
-            oficial[0]['fsr%'] = list(map(lambda x: x * 100, oficial[0]['fsr']))
-            oficial[0]['far%'] = list(map(lambda x: x * 100, oficial[0]['far']))
-            oficial[0]['fi.xi^2'] = [(xi * fixi) for xi, fixi in zip(oficial[0]['fi.xi'], oficial[0]['xi'])]
-            todo = oficial
-            json.dump(oficial, f, indent=4)
+def creacion(r : list): 
+    minimo = min(r)
+    maximo = max(r)
+    n = len(r)
+    rango = maximo - minimo 
+    k = 1 + 3.3 * math.log(n, 10)
+    amplitud = rango / k
+    if amplitud > int(amplitud): 
+        amplitud += 1
+        amplitud = int(amplitud)
+    lista = {}
+    for esto in r: 
+        try: lista[esto] += 1
+        except: lista[esto] = 1
+    real = []
+    para = 0
+    while True: 
+        if minimo > maximo: break
+        para = minimo + amplitud - 1
+        clase = {
+            'minimo': int(minimo), 
+            'maximo': int(para + 1)
+        }
+        minimo = para + 1
+        real.append(clase)
+    oficial = [{'clase': real}]
+    oficial[0]['fi'] = []
+    for esto in real: 
+        numero = 0
+        for i in range(esto['minimo'], esto['maximo']): 
+            try: numero += lista[i]
+            except: continue
+        oficial[0]['fi'].append(numero)
+    parte = []
+    for esto in oficial[0]['fi']: 
+        if len(parte) >= 1: parte.append(esto + parte[-1])
+        else: parte.append(esto)
+    oficial[0]['fa'] = parte
+    oficial[0]['xi'] = list(map(lambda x: (x['minimo'] + x['maximo']) / 2, oficial[0]['clase']))
+    oficial[0]['fi.xi'] = [(xi * fi) for xi, fi in zip(oficial[0]['fi'], oficial[0]['xi'])]
+    oficial[0]['fsr'] = list(map(lambda x: x / oficial[0]['fa'][-1], oficial[0]['fi']))
+    oficial[0]['far'] = list(map(lambda x: x / oficial[0]['fa'][-1], oficial[0]['fa']))
+    oficial[0]['fsr%'] = list(map(lambda x: x * 100, oficial[0]['fsr']))
+    oficial[0]['far%'] = list(map(lambda x: x * 100, oficial[0]['far']))
+    oficial[0]['fi.xi^2'] = [(xi * fixi) for xi, fixi in zip(oficial[0]['fi.xi'], oficial[0]['xi'])]
+    return oficial
+
+def proceso(todo : list): 
     mostrar_tabla(todo[0])
     total = todo[0]['fa'][-1]
     print(f'Total {total}')
@@ -139,6 +126,44 @@ def primero():
     pprint(todo[0]["fi"])
     print('**********************************************')
 
+def primero(): 
+    todo = []
+    with open('ejercicio.json', 'r+') as f: 
+        try: 
+            todo = json.load(f)
+        except: 
+            todo = f.readlines()
+            todo = list(todo)
+        if len(todo) == 0: 
+            try: 
+                r = str(input('Por favor, escribe la lista de los intervalos separados por espacios: \n'))
+                r = r.split(' ')
+                r = list(map(lambda x: int(x), r))
+            except: 
+                print('¡Oh no! Ingresaste un dato que no era un número, ¡No te equivoques!')
+                return
+            todo = creacion(r)
+            json.dump(todo, f, indent=4)
+    proceso(todo)
+
+def segundo(): 
+    lista = []
+    with open('ACS-250924.csv', newline='') as csvfile:
+        partes = csv.DictReader(csvfile)
+        for esto in partes: 
+            esto['Age'] = int(esto['Age'])
+            esto['Income'] = float(esto['Income'])
+            esto['HoursWk'] = int(esto['HoursWk'])
+            lista.append(esto)
+    grande = ['Age', 'Income', 'HoursWk']
+    for esto in grande: 
+        print('*' * 30)
+        print(f'[{esto}]')
+        print('*' * 30)
+        edad = list(map(lambda x: x[esto], lista))
+        todo = creacion(edad)
+        proceso(todo)
+
 def buscar_modales(fi : list): 
     lista = []
     maximo = max(fi)
@@ -188,6 +213,7 @@ def main():
     primero()
     print('Para cambiar los datos borre la información que está en el archivo "ejercicio.json"')
     print('Después imprima la información que está en el archivo README')
+    segundo()
 
 if __name__ == '__main__': 
     main()

@@ -81,7 +81,13 @@ def proceso(todo : list):
         except: fi_mas = 0
         d1 = fi - fi_menos
         d2 = fi - fi_mas
-        modal = li + (d1 / (d1 + d2)) * a
+        try: modal = li + (d1 / (d1 + d2)) * a
+        except: 
+            print(f'''"
+En la {lugares_modales.index(esto) + 1}° moda hubo una excepción que ameritó cambiar (d1 / (d1 + d2)) 
+porque daba una división de 0 sobre 0 que no está definida en matemática
+"''')
+            modal = li + a
         modales.append(modal)
     print(f'Modales: {modales}')
     varianza = (sum(todo[0]['fi.xi^2']) / total) - (media**2)
@@ -213,7 +219,7 @@ def main():
     primero()
     print('Para cambiar los datos borre la información que está en el archivo "ejercicio.json"')
     print('Después imprima la información que está en el archivo README')
-    segundo()
+    # segundo()
 
 if __name__ == '__main__': 
     main()

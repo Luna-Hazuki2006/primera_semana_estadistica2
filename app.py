@@ -219,7 +219,7 @@ def main():
     primero()
     print('Para cambiar los datos borre la información que está en el archivo "ejercicio.json"')
     print('Después imprima la información que está en el archivo README')
-    # segundo()
+    segundo()
 
 if __name__ == '__main__': 
     main()

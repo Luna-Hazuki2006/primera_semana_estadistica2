@@ -32,7 +32,7 @@ def creacion(r : list):
     oficial = [{'clase': real}]
     oficial[0]['fi'] = []
     for esto in real: 
-        numero = sum(map(lambda x: lista[x], filter(lambda x: float(x) >= esto['minimo'] and float(x) < esto['maximo'], lista.keys())))
+        numero = sum(map(lambda x: lista[x], filter(lambda x: x >= esto['minimo'] and x < esto['maximo'], lista.keys())))
         oficial[0]['fi'].append(numero)
     parte = []
     for esto in oficial[0]['fi']: 

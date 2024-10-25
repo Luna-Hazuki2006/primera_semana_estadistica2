@@ -11,7 +11,6 @@ def creacion(r : list):
     rango = maximo - minimo 
     k = 1 + 3.3 * math.log(n, 10)
     amplitud = rango / k
-    print(f'amplitud {amplitud}')
     if amplitud > int(amplitud): amplitud = int(amplitud)
     lista = {}
     for esto in r: 

@@ -7,6 +7,7 @@ def creacion(r : list):
     minimo = min(r)
     maximo = max(r)
     n = len(r)
+    print(n)
     rango = maximo - minimo 
     k = 1 + 3.3 * math.log(n, 10)
     amplitud = rango / k
@@ -32,9 +33,9 @@ def creacion(r : list):
     oficial[0]['fi'] = []
     for esto in real: 
         numero = 0
-        for i in range(esto['minimo'], esto['maximo']): 
-            try: numero += lista[i]
-            except: continue
+        for llave in lista.keys(): 
+            if float(llave) >= esto['minimo'] and float(llave) < esto['maximo']: 
+                numero += lista[llave]
         oficial[0]['fi'].append(numero)
     parte = []
     for esto in oficial[0]['fi']: 
@@ -219,7 +220,7 @@ def main():
     primero()
     print('Para cambiar los datos borre la información que está en el archivo "ejercicio.json"')
     print('Después imprima la información que está en el archivo README')
-    segundo()
+    # segundo()
 
 if __name__ == '__main__': 
     main()

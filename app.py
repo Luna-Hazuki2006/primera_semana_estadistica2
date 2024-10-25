@@ -51,11 +51,11 @@ def creacion(r : list):
 def proceso(todo : list): 
     mostrar_tabla(todo[0])
     total = todo[0]['fa'][-1]
-    print(f'Total {total}')
+    # print(f'Total {total}')
     a = todo[0]['clase'][0]['maximo'] - todo[0]['clase'][0]['minimo'] 
-    print(f"Sum: {sum(todo[0]['fi.xi'])}")
+    # print(f"Sum: {sum(todo[0]['fi.xi'])}")
     media = sum(todo[0]['fi.xi']) / total
-    print(f'Media aritmética: {media}')
+    print(f'Media aritmética: {round(media, 4)}')
     calculo = total / 2
     fa = 0
     for esto in todo[0]['fa']: 
@@ -67,7 +67,7 @@ def proceso(todo : list):
     fi_menos = todo[0]['fa'][indice - 1]
     fi = todo[0]['fi'][indice]
     mediana = li + ((calculo - fi_menos) / fi) * a
-    print(f'Mediana: {mediana}')
+    print(f'Mediana: {round(mediana, 4)}')
     lugares_modales = buscar_modales(todo[0]['fi'])
     modales = []
     for esto in lugares_modales: 
@@ -86,12 +86,12 @@ En la {lugares_modales.index(esto) + 1}° moda hubo una excepción que ameritó 
 porque daba una división de 0 sobre 0 que no está definida en matemática
 "''')
             modal = li + a
-        modales.append(modal)
+        modales.append(round(modal, 4))
     print(f'Modales: {modales}')
     varianza = (sum(todo[0]['fi.xi^2']) / total) - (media**2)
-    print(f'Varianza: {varianza}')
+    print(f'Varianza: {round(varianza, 4)}')
     desviacion = math.sqrt(varianza)
-    print(f'Desviación estándar: {desviacion}')
+    print(f'Desviación estándar: {round(desviacion, 4)}')
     cuartiles = []
     for i in range(1, 5): 
         q = obtencion(todo[0], ((25 * i) / 100) * total)
@@ -121,7 +121,7 @@ porque daba una división de 0 sobre 0 que no está definida en matemática
     if curtosis == 0: apuntamiento = 'Es mesocúrtica como la normal'
     elif curtosis > 0: apuntamiento = 'Es leptocúrtica apuntada'
     elif curtosis < 0: apuntamiento = 'Es platicúrtica aplanada'
-    print(f'Curtosis: {curtosis} ({apuntamiento})')
+    print(f'Curtosis: {round(curtosis, 4)} ({apuntamiento})')
     print('++++++++++++++++++++++++++++++++++++++++++++')
     print('**********************************************')
     print('Clases: ')
